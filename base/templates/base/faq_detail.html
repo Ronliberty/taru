@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{{ object.question }}</h1>
+  <p>{{ object.answer }}</p>
+  <p>
+    <a href="{% url 'base:faq_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:faq_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:faq_list' %}">Back to List</a>
+  </p>
+{% endblock %}

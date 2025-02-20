@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Delete Social Media Links</h1>
+  <p>Are you sure you want to delete these social media links?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+  </form>
+  <a href="{% url 'base:socialmedia_list' %}">Cancel</a>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Reservation Details</h1>
+  <p>Name: {{ object.name }}</p>
+  <p>Email: {{ object.email }}</p>
+  <p>Date & Time: {{ object.date_time|date:"Y-m-d H:i" }}</p>
+  <a href="{% url 'base:reservation_list' %}">Back to Reservations</a>
+{% endblock %}

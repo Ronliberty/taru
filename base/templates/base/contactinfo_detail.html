@@ -1,0 +1,12 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Contact Information</h1>
+  <p>Email: {{ object.email }}</p>
+  <p>Phone: {{ object.phone_number }}</p>
+  <p>Address: {{ object.address }}</p>
+  <p>
+    <a href="{% url 'base:contactinfo_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:contactinfo_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:contactinfo_list' %}">Back to List</a>
+  </p>
+{% endblock %}

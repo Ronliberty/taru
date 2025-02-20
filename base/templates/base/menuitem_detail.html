@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  <p>Price: Ksh{{ object.price }}</p>
+  <p>{{ object.description }}</p>
+  {% if object.image %}
+    <img src="{{ object.image.url }}" alt="{{ object.name }}">
+  {% endif %}
+  <p>
+    <a href="{% url 'base:menuitem_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:menuitem_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:menuitem_list' %}">Back to List</a>
+  </p>
+{% endblock %}

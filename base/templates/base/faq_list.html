@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>FAQs</h1>
+  <ul>
+    {% for faq in object_list %}
+      <li>
+        <a href="{% url 'base:faq_detail' faq.pk %}">{{ faq.question }}</a>
+      </li>
+    {% empty %}
+      <li>No FAQs available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:faq_create' %}">Add New FAQ</a>
+{% endblock %}

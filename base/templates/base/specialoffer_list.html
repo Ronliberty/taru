@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Special Offers</h1>
+  <ul>
+    {% for offer in object_list %}
+      <li>
+        <a href="{% url 'base:specialoffer_detail' offer.pk %}">{{ offer.title }}</a>
+      </li>
+    {% empty %}
+      <li>No special offers available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:specialoffer_create' %}">Create New Special Offer</a>
+{% endblock %}

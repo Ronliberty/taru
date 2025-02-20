@@ -1,0 +1,12 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Social Media Links</h1>
+  <p>Facebook: <a href="{{ object.facebook }}">{{ object.facebook }}</a></p>
+  <p>Instagram: <a href="{{ object.instagram }}">{{ object.instagram }}</a></p>
+  <p>Twitter: <a href="{{ object.twitter }}">{{ object.twitter }}</a></p>
+  <p>
+    <a href="{% url 'base:socialmedia_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:socialmedia_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:socialmedia_list' %}">Back to List</a>
+  </p>
+{% endblock %}

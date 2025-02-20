@@ -1,0 +1,11 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{{ object.caption }}</h1>
+  <img src="{{ object.image.url }}" alt="{{ object.caption }}">
+  <p>Uploaded at: {{ object.uploaded_at }}</p>
+  <p>
+    <a href="{% url 'base:galleryimage_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:galleryimage_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:galleryimage_list' %}">Back to List</a>
+  </p>
+{% endblock %}

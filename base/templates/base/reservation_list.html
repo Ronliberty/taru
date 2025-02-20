@@ -1,0 +1,15 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Reservations</h1>
+  <ul>
+    {% for reservation in object_list %}
+      <li>
+        <a href="{% url 'base:reservation_detail' reservation.pk %}">
+          {{ reservation.name }} on {{ reservation.date_time|date:"Y-m-d H:i" }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No reservations found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

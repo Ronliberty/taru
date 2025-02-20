@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Locations</h1>
+  <ul>
+    {% for location in object_list %}
+      <li>
+        <a href="{% url 'base:location_detail' location.pk %}">{{ location.name }}</a>
+      </li>
+    {% empty %}
+      <li>No locations available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:location_create' %}">Add New Location</a>
+{% endblock %}

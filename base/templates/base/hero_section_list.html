@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Hero Sections</h1>
+  <ul>
+    {% for hero in object_list %}
+      <li>
+        <a href="{% url 'base:hero_section_detail' hero.pk %}">{{ hero.title }}</a>
+      </li>
+    {% empty %}
+      <li>No hero sections available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:hero_section_create' %}">Create New Hero Section</a>
+{% endblock %}

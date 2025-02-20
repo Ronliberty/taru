@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Testimonials</h1>
+  <ul>
+    {% for testimonial in object_list %}
+      <li>
+        <a href="{% url 'base:testimonial_detail' testimonial.pk %}">{{ testimonial.customer_name }} - {{ testimonial.rating }} Stars</a>
+      </li>
+    {% empty %}
+      <li>No testimonials available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:testimonial_create' %}">Add New Testimonial</a>
+{% endblock %}

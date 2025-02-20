@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Landing Page</title>
+    <link rel="stylesheet" href="{% static 'base/css/styles.css' %}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Glide.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="restaurant-name">Starlit Plaza</h1>
+        <nav class="nav">
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-list">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#specials" class="nav-link">Specials</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#reservation" class="nav-link">Book Reservation</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'login' %}" class="nav-link">login</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" aria-label="Restaurant Hero Section"
+    {% if hero_section.background_image %}
+        style="background: url('{{ hero_section.background_image.url }}') no-repeat center center/cover;"
+    {% else %}
+        style="background: url('{% static 'default.jpg' %}') no-repeat center center/cover;"
+    {% endif %}>
+    <div class="hero-content">
+        <h1 class="hero-title">{{ hero_section.title }}</h1>
+        <p class="hero-text">{{ hero_section.paragraph }}</p>
+        <div class="hero-actions">
+            <a href="#reservation" class="btn menu-btn" aria-label="Book Reservation">Book NOW</a>
+            <a href="#menu" class="btn menu-btn" aria-label="View Menu">View Menu</a>
+        </div>
+    </div>
+    <div class="hero-overlay"></div>
+</section>
+
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">{{ about_section.title }}</h2>
+            <p class="section-subtitle">{{ about_section.subtitle }}</p>
+            <div class="about-content">
+                <p class="section-text">
+                    {{ about_section.paragraph1 }}
+                </p>
+                <p class="section-text">
+                   {{ about_section.paragraph2 }}
+                </p>
+                <p class="section-text">
+                    {{ about_section.paragraph3 }}
+                </p>
+            </div>
+            <a href="#menu" class="cta-button">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section menu">
+        <h2 class="section-title">Our Menu</h2>
+        <ul class="menu-list">
+            {% for item in menu_items %}
+        <li class="menu-item">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-item-image">
+            <div class="menu-item-details">
+                <strong>{{ item.name }}</strong> - Ksh{{ item.price }}
+                <p class="menu-item-description">{{ item.description }}</p>
+            </div>
+        </li>
+        {% endfor %}
+
+        </ul>
+
+    </section>
+
+    <!-- Special Offers Section -->
+    <section id="specials" class="section specials">
+    <div class="container">
+        <h2 class="section-title">🍽️ Special Offers</h2>
+        {% for special in specials %}
+        <p class="section-text">{{ special.description }}</p>
+
+        <div class="specials-grid">
+            <div class="special-item">
+                <h3>{{ special.title }}</h3>
+                <p>{{ special.details }}</p>
+            </div>
+        </div>
+
+        <p class="cta-text">{{ special.time_limit }} 🕒</p>
+        {% endfor %}
+        <a href="#reservation" class="cta-button" style="text-decoration: none;">Reserve Your Table Now</a>
+    </div>
+</section>
+
+
+    <!-- Testimonials Section -->
+   <section id="testimonials" class="section testimonials">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                {% for testimonial in testimonials %}
+                <li class="glide__slide">
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <div class="customer-info">
+                                <img src="{{ testimonial.image.url }}" alt="{{ testimonial.customer_name }}" class="customer-image">
+                                <span class="customer-name">{{ testimonial.customer_name }}</span>
+                                <div class="star-rating">
+
+
+                                </div>
+                            </div>
+                            <blockquote class="testimonial-text">
+                                "{{ testimonial.review }}"
+                            </blockquote>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+            <!-- Navigation -->
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">&#10094;</button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+   <section id="reservation" class="section reservation">
+    <h2 class="section-title">Book a Table</h2>
+    <form class="reservation-form" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" class="input" placeholder="Your Name" required>
+        <input type="email" name="email" class="input" placeholder="Your Email" required>
+        <input type="datetime-local" name="date_time" class="input" required>
+        <button type="submit" class="btn">Reserve Now</button>
+    </form>
+</section>
+
+
+    <!-- Location Section -->
+    <section id="location" class="section location">
+        <h2 class="section-title">Find Us</h2>
+        {% for location in locations %}
+        <iframe
+            class="map"
+            src="{{ location.map_embed_link }}"
+            width="100%"
+            height="300"
+            style="border:0;"
+            allowfullscreen>
+        </iframe>
+        {% endfor %}
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    {% for faq in faqs %}
+        <details class="faq-item">
+            <summary>{{ faq.question }}</summary>
+            <p>{{ faq.answer }}</p>
+        </details>
+    {% endfor %}
+</section>
+
+
+    <!-- Newsletter Subscription -->
+    <section id="newsletter" class="section newsletter">
+
+        <h2 class="section-title">Stay Updated</h2>
+        <p class="section-text">Subscribe for special offers and new menu items.</p>
+        <form class="newsletter-form" method="POST" action="">
+        {% csrf_token %}
+            <input type="email" class="input" placeholder="Enter your email" required>
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section gallery">
+        <h2 class="section-title">Our Gallery</h2>
+        <p class="section-subtitle">A glimpse of our delicious dishes, cozy ambiance, and happy moments</p>
+
+        <div class="gallery-grid" id="gallery-grid">
+            {% for image in images %}
+            <!-- Added hover effects and captions for better interactivity -->
+            <div class="gallery-item">
+                <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="gallery-img">
+                <div class="gallery-caption">{{ image.caption }}</div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Optional: Add a call-to-action button -->
+        <div class="gallery-cta">
+            <a href="#reservation" class="cta-button" style="text-decoration: none;">Reserve Your Table Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <h2 class="section-title">Contact Us</h2>
+        {% if contact %}
+        <p class="section-text">{{ contact.email }}</p>
+        <p class="section-text">{{ contact.phone_number }}</p>
+        <p class="section-text">{{ contact.address }}</p>
+    {% else %}
+        <p class="section-text">Contact details will be updated soon.</p>
+    {% endif %}
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+
+
+        <ul class="social-list">
+            {% if social_links %}
+            <li>
+                <a href="{{ social_links.facebook }}" class="social-link" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{{ social_links.instagram }}" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{{ social_links.twitter }}" class="social-link" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            {% else %}
+            <p>No social media links available.</p>
+    {% endif %}
+        </ul>
+        <p class="footer-text">&copy; 2025 Restaurant Name. All rights reserved.</p>
+    </footer>
+
+
+    <script src="{% static 'base/js/scripts.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function getPerView() {
+        return window.innerWidth <= 768 ? 1 : 3; // 1 on mobile, 3 on larger screens
+        }
+
+        let glide = new Glide('.glide', {
+            type: 'carousel',
+            autoplay: 2000,
+            hoverpause: true,
+            perView: getPerView(),
+            gap: 20,
+            animationDuration: 600,
+        });
+
+        glide.mount();
+
+        // Update `perView` on window resize
+        window.addEventListener("resize", function () {
+            glide.update({ perView: getPerView() });
+        });
+    });
+    new gridjs.Grid({
+            columns: ["Image", "Caption"],
+            data: [
+                [gridjs.html('<img src="try.jpg" alt="Delicious Dish" width="100">'), "Signature Dish"],
+                [gridjs.html('<img src="try.jpg" alt="Interior View" width="100">'), "Cozy Ambiance"],
+                [gridjs.html('<img src="try.jpg" alt="Happy Customers" width="100">'), "Happy Moments"]
+            ],
+            pagination: true,
+            search: true,
+            sort: true
+        }).render(document.getElementById("gallery-grid"));
+
+                // Navbar Toggle for Mobile
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            const navLinks = document.querySelectorAll(".nav-list li"); // Select all <li> elements
+
+            // Toggle the menu on button click
+            toggleBtn.addEventListener("click", function () {
+                this.classList.toggle("active");
+                navList.classList.toggle("active");
+            });
+
+            // Close the menu when clicking on a navigation item
+            navLinks.forEach(link => {
+                link.addEventListener("click", function () {
+                    toggleBtn.classList.remove("active"); // Remove active state from button
+                    navList.classList.remove("active");  // Hide the menu
+                });
+            });
+        });
+
+
+
+// Loading Screen
+    window.addEventListener('load', () => {
+        const loadingScreen = document.querySelector('.loading-screen');
+        loadingScreen.style.display = 'none';
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    </script>
+
+</body>
+</html>

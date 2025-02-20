@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{{ object.customer_name }}</h1>
+  <p>Rating: {{ object.rating }} Stars</p>
+  <blockquote>{{ object.review }}</blockquote>
+  {% if object.image %}
+    <img src="{{ object.image.url }}" alt="{{ object.customer_name }}">
+  {% endif %}
+  <p>
+    <a href="{% url 'base:testimonial_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:testimonial_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:testimonial_list' %}">Back to List</a>
+  </p>
+{% endblock %}

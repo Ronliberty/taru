@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Menu Items</h1>
+  <ul>
+    {% for item in object_list %}
+      <li>
+        <a href="{% url 'base:menuitem_detail' item.pk %}">{{ item.name }} - Ksh{{ item.price }}</a>
+      </li>
+    {% empty %}
+      <li>No menu items available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:menuitem_create' %}">Add New Menu Item</a>
+{% endblock %}

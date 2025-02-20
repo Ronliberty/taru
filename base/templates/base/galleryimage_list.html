@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Gallery Images</h1>
+  <ul>
+    {% for image in object_list %}
+      <li>
+        <a href="{% url 'base:galleryimage_detail' image.pk %}">{{ image.caption }}</a>
+      </li>
+    {% empty %}
+      <li>No images available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:galleryimage_create' %}">Upload New Image</a>
+{% endblock %}

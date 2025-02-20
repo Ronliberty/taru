@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{% if object %}Edit Contact Info{% else %}Add New Contact Info{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'base:contactinfo_list' %}">Back to List</a>
+{% endblock %}

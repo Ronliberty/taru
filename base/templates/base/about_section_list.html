@@ -1,0 +1,65 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+<style>
+  .about-list {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .about-list h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  .about-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .about-list ul li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  .about-list ul li:last-child {
+    border-bottom: none;
+  }
+  .about-list ul li a {
+    font-size: 1.2em;
+    color: #1E88E5;
+    text-decoration: none;
+  }
+  .about-list ul li a:hover {
+    text-decoration: underline;
+  }
+  .about-list a.create-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #1E88E5;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .about-list a.create-link:hover {
+    background-color: #1565C0;
+  }
+</style>
+
+<div class="about-list">
+  <h1>About Sections</h1>
+  <ul>
+    {% for about in object_list %}
+      <li>
+        <a href="{% url 'base:about_section_detail' about.pk %}">{{ about.title }}</a>
+      </li>
+    {% empty %}
+      <li>No about sections available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:about_section_create' %}" class="create-link">Create New About Section</a>
+</div>
+{% endblock %}

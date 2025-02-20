@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  <iframe src="{{ object.map_embed_link }}" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+  <p>
+    <a href="{% url 'base:location_update' object.pk %}">Edit</a> |
+    <a href="{% url 'base:location_delete' object.pk %}">Delete</a> |
+    <a href="{% url 'base:location_list' %}">Back to List</a>
+  </p>
+{% endblock %}

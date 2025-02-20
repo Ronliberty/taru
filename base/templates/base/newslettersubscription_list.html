@@ -1,0 +1,13 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Newsletter Subscriptions</h1>
+  <ul>
+    {% for subscription in object_list %}
+      <li>
+        <a href="{% url 'base:newslettersubscription_detail' subscription.pk %}">{{ subscription.email }}</a>
+      </li>
+    {% empty %}
+      <li>No subscriptions found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

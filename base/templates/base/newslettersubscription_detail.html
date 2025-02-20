@@ -1,0 +1,7 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Newsletter Subscription Detail</h1>
+  <p>Email: {{ object.email }}</p>
+  <p>Subscribed At: {{ object.subscribed_at }}</p>
+  <a href="{% url 'base:newslettersubscription_list' %}">Back to List</a>
+{% endblock %}

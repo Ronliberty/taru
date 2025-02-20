@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+  <h1>Social Media Links</h1>
+  <ul>
+    {% for social in object_list %}
+      <li>
+        <a href="{% url 'base:socialmedia_detail' social.pk %}">View Social Media Links</a>
+      </li>
+    {% empty %}
+      <li>No social media links available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'base:socialmedia_create' %}">Add New Social Media Links</a>
+{% endblock %}
